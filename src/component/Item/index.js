@@ -13,8 +13,8 @@ class Item extends Component {
 
     render() {
         return <div>
-            <label style={{textDecorationLine: this.props.item.isDone ? 'line-through' : 'none'}}
-                   onClick={this.handleFinishItem}>{this.props.item.value}</label>
+            <label style={{textDecorationLine: this.props.item.status ? 'line-through' : 'none'}}
+                   onClick={this.handleFinishItem}>{this.props.item.content}</label>
             <button onClick={this.handleDeleteItem}>X</button>
         </div>
 

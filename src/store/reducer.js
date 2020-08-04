@@ -1,4 +1,4 @@
-import {ADD_ITEM, DELETE_ITEM, FINISH_ITEM} from "./actionTypes";
+import {ADD_ITEM, DELETE_ITEM, FETCH_ITEM, FINISH_ITEM} from "./actionTypes";
 
 const defaultState = {
     itemList: []
@@ -24,6 +24,12 @@ export default (state = defaultState, action) => {
             return {
                 itemList: [...state.itemList]
             };
+        case FETCH_ITEM:
+            let result =  {
+                itemList: defaultState.itemList.concat(action.itemList)
+            };
+            console.log('result', result)
+            return result;
         default:
             return defaultState;
     }
