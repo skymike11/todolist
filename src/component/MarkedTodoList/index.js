@@ -3,7 +3,7 @@ import {ADD_ITEM, DELETE_ITEM, FINISH_ITEM} from "../../store/actionTypes";
 import {connect} from "react-redux";
 import ItemList from "../ItemList";
 
-class ItemGroup extends Component {
+class MarkedItemGroup extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -36,12 +36,13 @@ class ItemGroup extends Component {
 
     render() {
         return <div>
-            <h3>To Do List</h3>
+            <h3>Marked To Do List</h3>
             <label>
                 <input type='text' ref={value => this.input = value}/>
             </label>
             <button onClick={this.handleAddItem}>Add</button>
-            <ItemList items={this.props.itemList} onDelete={this.handleDeleteItem} onFinish={this.handleFinishItem}/>
+            <ItemList items={this.props.itemList.filter(item => item.isDone === true)} onDelete={this.handleDeleteItem}
+                      onFinish={this.handleFinishItem}/>
         </div>
     }
 }
@@ -58,4 +59,4 @@ const mapDispatchToProps = dispatch => ({
     finishItem: (index) => dispatch({type: FINISH_ITEM, index: index})
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemGroup);
+export default connect(mapStateToProps, mapDispatchToProps)(MarkedItemGroup);
