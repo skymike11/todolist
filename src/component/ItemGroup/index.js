@@ -9,13 +9,17 @@ class ItemGroup extends Component {
         }
     }
 
+    addNewItem = () => {
+
+    };
+
     render() {
         const initArray = [...Array(this.state.size).keys()];
         return <div>
             <label>
                 <input/>
             </label>
-            <button>Add</button>
+            <button onClick={this.addNewItem}>Add</button>
             {
                 initArray.map((item, index) =>
                     <Item groupSize={this.state.size} key={index}/>)
@@ -24,5 +28,7 @@ class ItemGroup extends Component {
 
     }
 }
+
+
 
 export default ItemGroup;
