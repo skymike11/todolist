@@ -7,7 +7,7 @@ export default {
         return axios.get(host + "/todos");
     },
     updateTodo: function (id, status) {
-        return axios.put(host + `/todos/${id}`, {"status": status})
+        return axios.put(host + `/todos/${id}`, {"status": !status})
     },
     addTodo: function (item) {
         return axios.post(host + "/todos", {item})

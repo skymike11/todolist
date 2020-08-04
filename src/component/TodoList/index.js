@@ -16,12 +16,12 @@ class ItemGroup extends Component {
 
     handleAddItem = () => {
         let inputValue = this.input.value;
+        let that = this;
         if (inputValue !== "") {
-            this.props.addItem({
-                value: inputValue,
-                isDone: false
+            Api.addTodo({content: inputValue, status: false}).then(res=>{
+                this.input.value = "";
+                that.initTodoList();
             });
-            this.input.value = ""
         } else {
             alert("No Allow Empty");
         }
@@ -32,8 +32,11 @@ class ItemGroup extends Component {
         this.props.deleteItem(index);
     };
 
-    handleFinishItem = (index) => {
-        this.props.finishItem(index);
+    handleFinishItem = (id, status) => {
+        let that = this;
+        Api.updateTodo(id, status).then(res => {
+            that.initTodoList();
+        })
     };
 
     initTodoList = () => {

@@ -7,8 +7,8 @@ class Item extends Component {
         onDelete(index);
     };
     handleFinishItem = () => {
-        const {onFinish, index} = this.props;
-        onFinish(index);
+        const {onFinish, item} = this.props;
+        onFinish(item.id, item.status);
     };
 
     render() {
