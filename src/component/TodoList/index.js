@@ -14,37 +14,30 @@ class ItemGroup extends Component {
         }
     }
 
-    handleAddItem = () => {
+    handleAddItem = async () => {
         let inputValue = this.input.value;
-        let that = this;
         if (inputValue !== "") {
-            Api.addTodo({content: inputValue, status: false}).then(res=>{
-                this.input.value = "";
-                that.initTodoList();
-            });
+            await Api.addTodo({content: inputValue, status: false})
+            this.input.value = "";
+            this.initTodoList();
         } else {
             alert("No Allow Empty");
         }
     };
 
-    handleDeleteItem = (id) => {
-        let that = this;
-        Api.deleteTodo(id).then(res => {
-            that.initTodoList();
-        })
+    handleDeleteItem = async (id) => {
+        await Api.deleteTodo(id)
+        this.initTodoList();
     };
 
-    handleFinishItem = (id, status) => {
-        let that = this;
-        Api.updateTodo(id, status).then(res => {
-            that.initTodoList();
-        })
+    handleFinishItem = async (id, status) => {
+        await Api.updateTodo(id, status);
+        this.initTodoList();
     };
 
-    initTodoList = () => {
-        Api.getTodos().then(res => {
-            this.props.fetchItems(res.data)
-        });
+    initTodoList = async () => {
+        let res = await Api.getTodos();
+        this.props.fetchItems(res.data)
     };
 
     render() {
