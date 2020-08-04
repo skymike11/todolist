@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Item from "../Item"
-import {ADD_ITEM, DELETE_ITEM} from "../../store/actionTypes";
+import {ADD_ITEM, DELETE_ITEM, FINISH_ITEM} from "../../store/actionTypes";
 import {connect} from "react-redux";
 
 class ItemGroup extends Component {
@@ -15,7 +15,10 @@ class ItemGroup extends Component {
     handleAddItem = () => {
         let inputValue = this.input.value;
         if (inputValue !== "") {
-            this.props.addItem(inputValue);
+            this.props.addItem({
+                value: inputValue,
+                isDone : false
+            });
             this.input.value = ""
         } else {
             alert("No Allow Empty");
@@ -27,6 +30,10 @@ class ItemGroup extends Component {
         this.props.deleteItem(index);
     };
 
+    handleFinishItem = (index) => {
+        this.props.finishItem(index);
+    };
+
     render() {
         return <div>
             <label>
@@ -35,7 +42,7 @@ class ItemGroup extends Component {
             <button onClick={this.handleAddItem}>Add</button>
             {
                 this.props.itemList.map((item, index) =>
-                    <Item value={item} key={index} index={index} deleteItem={this.handleDeleteItem}/>)
+                    <Item item={item} key={index} index={index} onDelete={this.handleDeleteItem} onFinish={this.handleFinishItem}/>)
             }
         </div>
     }
@@ -48,8 +55,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    addItem: (inputValue) => dispatch({type: ADD_ITEM, inputValue: inputValue}),
-    deleteItem: (index) => dispatch({type: DELETE_ITEM, index: index})
+    addItem: (item) => dispatch({type: ADD_ITEM, item: item}),
+    deleteItem: (index) => dispatch({type: DELETE_ITEM, index: index}),
+    finishItem: (index) => dispatch({type: FINISH_ITEM, index: index})
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemGroup);
