@@ -14,8 +14,13 @@ class ItemGroup extends Component {
 
     addNewItem = () => {
         let inputValue = this.input.value;
-        this.props.addItem(inputValue);
-        this.input.value = ""
+        if (inputValue !== "") {
+            this.props.addItem(inputValue);
+            this.input.value = ""
+        } else {
+            alert("No Allow Empty");
+        }
+
     };
 
     handleDeleteItem = (index) =>{
