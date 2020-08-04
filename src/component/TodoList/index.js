@@ -9,7 +9,7 @@ class ItemGroup extends Component {
         super(props);
         this.initTodoList();
         this.state = {
-            size: 3,
+            size: 0,
             inputValue: ""
         }
     }
@@ -25,11 +25,13 @@ class ItemGroup extends Component {
         } else {
             alert("No Allow Empty");
         }
-
     };
 
-    handleDeleteItem = (index) => {
-        this.props.deleteItem(index);
+    handleDeleteItem = (id) => {
+        let that = this;
+        Api.deleteTodo(id).then(res => {
+            that.initTodoList();
+        })
     };
 
     handleFinishItem = (id, status) => {

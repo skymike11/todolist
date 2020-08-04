@@ -3,8 +3,8 @@ import React, {Component} from "react";
 class Item extends Component {
 
     handleDeleteItem = () => {
-        const {onDelete, index} = this.props;
-        onDelete(index);
+        const {onDelete, item} = this.props;
+        onDelete(item.id);
     };
     handleFinishItem = () => {
         const {onFinish, item} = this.props;
