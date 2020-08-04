@@ -1,10 +1,16 @@
 import React, {Component} from "react";
 
 class Item extends Component {
+
+    handleDeleteItem = () => {
+        const {deleteItem, index} = this.props;
+        deleteItem(index);
+    };
+
     render() {
         return <div>
             <label>{this.props.value}</label>
-            <button>X</button>
+            <button onClick={this.handleDeleteItem}>X</button>
         </div>
 
     }

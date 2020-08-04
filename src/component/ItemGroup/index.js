@@ -18,9 +18,12 @@ class ItemGroup extends Component {
         this.input.value = ""
     };
 
+    handleDeleteItem = (index) =>{
+        this.props.deleteItem(index);
+    };
+
     render() {
         const itemList = this.props.itemList;
-        console.log('itemList', this.props.itemList)
         return <div>
             <label>
                 <input type='text' ref={value => this.input = value}/>
@@ -28,7 +31,7 @@ class ItemGroup extends Component {
             <button onClick={this.addNewItem}>Add</button>
             {
                 itemList.map((item, index) =>
-                    <Item value={item} key={index} store={this.store}/>)
+                    <Item value={item} key={index} index={index} deleteItem={this.handleDeleteItem}/>)
             }
         </div>
     }
@@ -42,7 +45,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     addItem: (inputValue) => dispatch({type: ADD_ITEM, inputValue: inputValue}),
-    deleteItem : (index) => dispatch({type: DELETE_ITEM, inputValue: index})
+    deleteItem : (index) => dispatch({type: DELETE_ITEM, index: index})
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemGroup);

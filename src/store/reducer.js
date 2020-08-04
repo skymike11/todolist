@@ -10,8 +10,11 @@ export default (state = defaultState, action) => {
                 itemList: [...state.itemList, action.inputValue]
             };
         case DELETE_ITEM:
-            defaultState.itemList.remove(action.index);
-            return defaultState;
+            return {
+                itemList: state.itemList.filter((value, index) => {
+                    return index !== action.index
+                })
+            };
         default:
             return defaultState;
     }
