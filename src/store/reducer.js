@@ -6,7 +6,8 @@ const defaultState = {
 export default (state = defaultState, action) => {
     switch (action.type) {
         case ADD_ITEM:
-            defaultState.itemList.push(action.value);
+            defaultState.itemList.push(action.inputValue);
+            console.log(defaultState)
             return defaultState;
         case DELETE_ITEM:
             defaultState.itemList.remove(action.index);
