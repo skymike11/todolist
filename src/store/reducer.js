@@ -26,9 +26,9 @@ export default (state = defaultState, action) => {
             };
         case FETCH_ITEM:
             let result =  {
-                itemList: defaultState.itemList.concat(action.itemList)
+                itemList: action.itemList
             };
-            console.log('result', result)
+            console.log('result', result);
             return result;
         default:
             return defaultState;
