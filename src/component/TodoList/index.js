@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import Item from "../Item"
 import {ADD_ITEM, DELETE_ITEM, FINISH_ITEM} from "../../store/actionTypes";
 import {connect} from "react-redux";
+import ItemList from "../ItemList";
 
 class ItemGroup extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class ItemGroup extends Component {
         if (inputValue !== "") {
             this.props.addItem({
                 value: inputValue,
-                isDone : false
+                isDone: false
             });
             this.input.value = ""
         } else {
@@ -40,10 +40,7 @@ class ItemGroup extends Component {
                 <input type='text' ref={value => this.input = value}/>
             </label>
             <button onClick={this.handleAddItem}>Add</button>
-            {
-                this.props.itemList.map((item, index) =>
-                    <Item item={item} key={index} index={index} onDelete={this.handleDeleteItem} onFinish={this.handleFinishItem}/>)
-            }
+            <ItemList items={this.props.itemList} onDelete={this.handleDeleteItem} onFinish={this.handleFinishItem}/>
         </div>
     }
 }
