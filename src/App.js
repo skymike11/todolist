@@ -4,6 +4,7 @@ import TodoList from "./component/TodoList";
 import MarkedTodoList from "./component/MarkedTodoList";
 import {HashRouter, Route} from 'react-router-dom';
 import Menu from "./component/Menu";
+import 'antd/dist/antd.css';
 
 function App() {
     return (

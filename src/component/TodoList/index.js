@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import ItemList from "../ItemList";
 import Api from '../../api/Api'
+import HeaderTitle from "../HeaderTitle";
+import InputItem from "../InputItem";
 
 class TodoList extends Component {
     constructor(props) {
@@ -8,18 +10,17 @@ class TodoList extends Component {
         this.state = {
             size: 0,
             inputValue: "",
-            itemList :[]
+            itemList: []
         }
     }
-    componentWillMount () {
+
+    componentWillMount() {
         this.initTodoList();
     }
 
-    handleAddItem = async () => {
-        let inputValue = this.input.value;
+    handleAddItem = async (inputValue) => {
         if (inputValue !== "") {
             await Api.addTodo({content: inputValue, status: false})
-            this.input.value = "";
             this.initTodoList();
         } else {
             alert("No Allow Empty");
@@ -46,11 +47,8 @@ class TodoList extends Component {
 
     render() {
         return <div>
-            <h3>To Do List</h3>
-            <label>
-                <input type='text' ref={value => this.input = value}/>
-            </label>
-            <button onClick={this.handleAddItem}>Add</button>
+            <HeaderTitle/>
+            <InputItem onAdd={this.handleAddItem}/>
             <ItemList items={this.state.itemList} onDelete={this.handleDeleteItem} onFinish={this.handleFinishItem}/>
         </div>
     }
