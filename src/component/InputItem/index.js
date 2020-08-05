@@ -11,7 +11,6 @@ class InputItem extends Component {
 
     handleAddItem = () => {
         const {onAdd} = this.props;
-        console.log(this.state.inputValue)
         onAdd(this.state.inputValue)
     };
 
@@ -24,10 +23,9 @@ class InputItem extends Component {
 
     render() {
         return (
-            <div style={{width: "300px", alignContent: "center"}}>
-                <label>
-                    <Input placeholder="Please Input Your Note" onChange={event => this.handleInputChange(event)}/>
-                </label>
+            <div style={{width: "100%", alignContent: "center", float: "left"}}>
+                <Input style={{width: "400px"}} placeholder="Please Input Your Note"
+                       onChange={event => this.handleInputChange(event)}/>
                 <Button type="primary" onClick={this.handleAddItem}>Add</Button>
             </div>)
     }
