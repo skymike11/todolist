@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import PropTypes from 'prop-types'
 
 class Item extends Component {
 
@@ -20,5 +21,11 @@ class Item extends Component {
 
     }
 }
+
+Item.propTypes = {
+    onDelete : PropTypes.func.isRequired,
+    onFinish : PropTypes.func.isRequired,
+    item : PropTypes.object.isRequired
+};
 
 export default Item;
