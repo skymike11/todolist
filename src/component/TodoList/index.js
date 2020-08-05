@@ -4,14 +4,17 @@ import {connect} from "react-redux";
 import ItemList from "../ItemList";
 import Api from '../../api/Api'
 
-class ItemGroup extends Component {
+class TodoList extends Component {
     constructor(props) {
         super(props);
-        this.initTodoList();
         this.state = {
             size: 0,
-            inputValue: ""
+            inputValue: "",
+            itemList :[]
         }
+    }
+    componentWillMount () {
+        this.initTodoList();
     }
 
     handleAddItem = async () => {
@@ -37,7 +40,10 @@ class ItemGroup extends Component {
 
     initTodoList = async () => {
         let res = await Api.getTodos();
-        this.props.fetchItems(res.data)
+        this.setState({
+            itemList: res.data
+        });
+        console.log(this.state.itemList)
     };
 
     render() {
@@ -47,22 +53,9 @@ class ItemGroup extends Component {
                 <input type='text' ref={value => this.input = value}/>
             </label>
             <button onClick={this.handleAddItem}>Add</button>
-            <ItemList items={this.props.itemList} onDelete={this.handleDeleteItem} onFinish={this.handleFinishItem}/>
+            <ItemList items={this.state.itemList} onDelete={this.handleDeleteItem} onFinish={this.handleFinishItem}/>
         </div>
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        itemList: state.itemList
-    }
-};
-
-const mapDispatchToProps = dispatch => ({
-    addItem: (item) => dispatch({type: ADD_ITEM, item: item}),
-    deleteItem: (index) => dispatch({type: DELETE_ITEM, index: index}),
-    finishItem: (index) => dispatch({type: FINISH_ITEM, index: index}),
-    fetchItems: (itemList) => dispatch({type: FETCH_ITEM, itemList: itemList})
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ItemGroup);
+export default TodoList;
