@@ -32,9 +32,9 @@ class ItemList extends Component {
 
     render() {
         return <div style={{alignItems: "center", marginTop: "50px"}}>
-            <Table dataSource={this.props.items} style={{width: "30%", margin: "0 auto"}}>
+            <Table dataSource={this.props.items} style={{width: "30%", margin: "0 auto"}} rowKey={record => record.id}>
                 <Column title='Id' dataIndex='backupNo' render={(text, recorder, index) => <span>{index + 1}</span>}/>
-                <Column title='Content' dataIndex='content' style={{width : "180px"}}/>
+                <Column title='Content' dataIndex='content' style={{width: "180px"}}/>
                 <Column title='Status' dataIndex='status'
                         render={(text, recorder) => {
                             if (recorder.status === true) {

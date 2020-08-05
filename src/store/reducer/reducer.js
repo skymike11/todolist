@@ -1,5 +1,5 @@
-import {ADD_ITEM, DELETE_ITEM, FETCH_ITEM, FINISH_ITEM} from "./actionTypes";
-import {createReducer} from '@reduxjs/toolkit'
+import {ADD_ITEM, DELETE_ITEM, FETCH_ITEM, FINISH_ITEM} from "../actionTypes";
+
 
 const defaultState = {
     itemList: []
@@ -35,3 +35,4 @@ export default (state = defaultState, action) => {
             return defaultState;
     }
 }
+
