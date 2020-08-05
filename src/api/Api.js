@@ -10,7 +10,7 @@ export default {
         return axios.put(host + `/todos/${id}`, {"status": !status})
     },
     addTodo: function (item) {
-        return axios.post(host + "/todos", {item})
+        return axios.post(host + "/todos", item)
     },
     deleteTodo: function (id) {
         return axios.delete(host + `/todos/${id}`)
