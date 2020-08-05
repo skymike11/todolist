@@ -47,7 +47,7 @@ class TodoList extends Component {
 
     render() {
         return <div>
-            <HeaderTitle/>
+            <HeaderTitle title={"To Do List"}/>
             <InputItem onAdd={this.handleAddItem}/>
             <ItemList items={this.state.itemList} onDelete={this.handleDeleteItem} onFinish={this.handleFinishItem}/>
         </div>

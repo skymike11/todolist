@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import ItemList from "../ItemList";
 import Api from "../../api/Api";
+import HeaderTitle from "../HeaderTitle";
+import InputItem from "../InputItem";
 
 class MarkedTodoList extends Component {
     constructor(props) {
@@ -17,11 +19,9 @@ class MarkedTodoList extends Component {
     }
 
 
-    handleAddItem = async () => {
-        let inputValue = this.input.value;
+    handleAddItem = async (inputValue) => {
         if (inputValue !== "") {
             await Api.addTodo({content: inputValue, status: false})
-            this.input.value = "";
             this.initTodoList();
         } else {
             alert("No Allow Empty");
@@ -48,11 +48,8 @@ class MarkedTodoList extends Component {
 
     render() {
         return <div>
-            <h3>Marked To Do List</h3>
-            <label>
-                <input type='text' ref={value => this.input = value}/>
-            </label>
-            <button onClick={this.handleAddItem}>Add</button>
+            <HeaderTitle title={"Markd To Do List"}/>
+            <InputItem onAdd={this.handleAddItem}/>
             <ItemList items={this.state.itemList.filter(item => item.status === true)} onDelete={this.handleDeleteItem}
                       onFinish={this.handleFinishItem}/>
         </div>
