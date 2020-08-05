@@ -1,18 +1,21 @@
 import React, {Component} from "react";
-import {ADD_ITEM, DELETE_ITEM, FETCH_ITEM, FINISH_ITEM} from "../../store/actionTypes";
-import {connect} from "react-redux";
 import ItemList from "../ItemList";
 import Api from "../../api/Api";
 
-class MarkedItemGroup extends Component {
+class MarkedTodoList extends Component {
     constructor(props) {
         super(props);
-        this.initTodoList();
         this.state = {
             size: 0,
-            inputValue: ""
+            inputValue: "",
+            itemList: []
         }
     }
+
+    componentWillMount() {
+        this.initTodoList();
+    }
+
 
     handleAddItem = async () => {
         let inputValue = this.input.value;
@@ -26,7 +29,7 @@ class MarkedItemGroup extends Component {
     };
 
     handleDeleteItem = async (id) => {
-        await Api.deleteTodo(id)
+        await Api.deleteTodo(id);
         this.initTodoList();
     };
 
@@ -37,8 +40,11 @@ class MarkedItemGroup extends Component {
 
     initTodoList = async () => {
         let res = await Api.getTodos();
-        this.props.fetchItems(res.data)
+        this.setState({
+            itemList: res.data
+        });
     };
+
 
     render() {
         return <div>
@@ -47,23 +53,10 @@ class MarkedItemGroup extends Component {
                 <input type='text' ref={value => this.input = value}/>
             </label>
             <button onClick={this.handleAddItem}>Add</button>
-            <ItemList items={this.props.itemList.filter(item => item.status === true)} onDelete={this.handleDeleteItem}
+            <ItemList items={this.state.itemList.filter(item => item.status === true)} onDelete={this.handleDeleteItem}
                       onFinish={this.handleFinishItem}/>
         </div>
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        itemList: state.itemList
-    }
-};
-
-const mapDispatchToProps = dispatch => ({
-    addItem: (item) => dispatch({type: ADD_ITEM, item: item}),
-    deleteItem: (index) => dispatch({type: DELETE_ITEM, index: index}),
-    finishItem: (index) => dispatch({type: FINISH_ITEM, index: index}),
-    fetchItems: (itemList) => dispatch({type: FETCH_ITEM, itemList: itemList})
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MarkedItemGroup);
+export default MarkedTodoList;
