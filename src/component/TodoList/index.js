@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-import {ADD_ITEM, DELETE_ITEM, FETCH_ITEM, FINISH_ITEM} from "../../store/actionTypes";
-import {connect} from "react-redux";
 import ItemList from "../ItemList";
 import Api from '../../api/Api'
 
@@ -29,7 +27,7 @@ class TodoList extends Component {
     };
 
     handleDeleteItem = async (id) => {
-        await Api.deleteTodo(id)
+        await Api.deleteTodo(id);
         this.initTodoList();
     };
 
