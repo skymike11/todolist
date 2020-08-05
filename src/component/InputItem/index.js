@@ -24,7 +24,7 @@ class InputItem extends Component {
     render() {
         return (
             <div style={{width: "100%", alignContent: "center", float: "left"}}>
-                <Input style={{width: "400px"}} placeholder="Please Input Your Note"
+                <Input style={{width: "420px"}} placeholder="Please Input Your Note"
                        onChange={event => this.handleInputChange(event)}/>
                 <Button type="primary" onClick={this.handleAddItem}>Add</Button>
             </div>)
