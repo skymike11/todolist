@@ -30,10 +30,10 @@ class ItemList extends Component {
         }
     };
 
-    render() {
+    render() {//todo
         return <div style={{alignItems: "center", marginTop: "50px"}}>
             <Table dataSource={this.props.items} style={{width: "30%", margin: "0 auto"}} rowKey={record => record.id}>
-                <Column title='Id' dataIndex='backupNo' render={(text, recorder, index) => <span>{index + 1}</span>}/>
+                <Column title='Id' dataIndex='backupNo' render={(text, item, index) => <span>{index + 1}</span>}/>
                 <Column title='Content' dataIndex='content' style={{width: "180px"}}/>
                 <Column title='Status' dataIndex='status'
                         render={(text, recorder) => {
@@ -57,5 +57,5 @@ class ItemList extends Component {
 
     }
 }
-
+//todo render use jsx
 export default ItemList;

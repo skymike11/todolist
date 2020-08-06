@@ -23,7 +23,7 @@ class TodoList extends Component {
             await Api.addTodo({content: inputValue, status: false})
             this.initTodoList();
         } else {
-            alert("No Allow Empty");
+            alert("No Allow Empty"); //todo const no allow empty
         }
     };
 
@@ -45,7 +45,7 @@ class TodoList extends Component {
         console.log(this.state.itemList)
     };
 
-    render() {
+    render() { //todo const to to list
         return <div>
             <HeaderTitle title={"To Do List"}/>
             <InputItem onAdd={this.handleAddItem}/>

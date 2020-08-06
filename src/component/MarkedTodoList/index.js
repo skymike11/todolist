@@ -48,7 +48,7 @@ class MarkedTodoList extends Component {
 
     render() {
         return <div>
-            <HeaderTitle title={"Markd To Do List"}/>
+            <HeaderTitle title={"Marked To Do List"}/>
             <InputItem onAdd={this.handleAddItem}/>
             <ItemList items={this.state.itemList.filter(item => item.status === true)} onDelete={this.handleDeleteItem}
                       onFinish={this.handleFinishItem}/>
