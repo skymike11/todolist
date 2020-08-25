@@ -3,6 +3,8 @@ import ItemList from "../ItemList";
 import Api from '../../api/Api'
 import HeaderTitle from "../HeaderTitle";
 import InputItem from "../InputItem";
+import MapIndex from "../MapIndex";
+import './index.css'
 
 class TodoList extends Component {
     constructor(props) {
@@ -45,8 +47,11 @@ class TodoList extends Component {
         console.log(this.state.itemList)
     };
 
-    render() { //todo const to to list
+    render() {
         return <div>
+            <div className="container">
+                <MapIndex/>
+            </div>
             <HeaderTitle title={"To Do List"}/>
             <InputItem onAdd={this.handleAddItem}/>
             <ItemList items={this.state.itemList} onDelete={this.handleDeleteItem} onFinish={this.handleFinishItem}/>

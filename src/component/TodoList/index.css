@@ -1,0 +1,9 @@
+.container {
+  max-width: 54em;
+  padding: 0 6em 1.5em;
+  margin: 0 auto;
+  overflow: hidden;
+  padding-top: 10px;
+  border: 1px solid #ccc;
+
+}
