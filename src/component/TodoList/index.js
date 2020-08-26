@@ -5,6 +5,7 @@ import HeaderTitle from "../HeaderTitle";
 import InputItem from "../InputItem";
 import MapIndex from "../MapIndex";
 import './index.css'
+import {Drawer, Input, InputNumber, Modal, Option, Select} from "antd";
 
 class TodoList extends Component {
     constructor(props) {
@@ -12,7 +13,10 @@ class TodoList extends Component {
         this.state = {
             size: 0,
             inputValue: "",
-            itemList: []
+            itemList: [],
+            visible: false,
+            placement: "bottom",
+            drawerVisible: false
         }
     }
 
@@ -47,14 +51,62 @@ class TodoList extends Component {
         console.log(this.state.itemList)
     };
 
+    showModal = () => {
+        this.setState({
+            visible: true,
+            drawerVisible: true
+        });
+    };
+
+    handleOk = e => {
+        console.log(e);
+        this.setState({
+            visible: false
+        });
+    };
+
+    handleCancel = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+            drawerVisible: false
+        });
+    };
+
     render() {
         return <div>
             <div className="container">
-                <MapIndex/>
+                <MapIndex onSelect={this.showModal}/>
             </div>
-            <HeaderTitle title={"To Do List"}/>
-            <InputItem onAdd={this.handleAddItem}/>
-            <ItemList items={this.state.itemList} onDelete={this.handleDeleteItem} onFinish={this.handleFinishItem}/>
+            <Modal
+                visible={this.state.visible}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+                footer={false}
+                mask={false}
+            >
+                <Input.Group compact>
+                    <Select defaultValue="Option1">
+
+                    </Select>
+                    <InputNumber/>
+                </Input.Group>
+            </Modal>
+            <Drawer
+                title="Basic Drawer"
+                placement={this.state.placement}
+                onClose={this.onClose}
+                visible={this.state.drawerVisible}
+                key={this.state.placement}
+                mask={false}
+            >
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+            </Drawer>
+            {/*<HeaderTitle title={"To Do List"}/>*/}
+            {/*<InputItem onAdd={this.handleAddItem}/>*/}
+            {/*<ItemList items={this.state.itemList} onDelete={this.handleDeleteItem} onFinish={this.handleFinishItem}/>*/}
         </div>
     }
 }
