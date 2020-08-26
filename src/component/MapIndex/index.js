@@ -1,7 +1,6 @@
 import L from 'leaflet'
 import React, {Component} from 'react'
 import './index.css'
-import {Select} from 'antd';
 
 class MapIndex extends Component {
 
@@ -10,14 +9,7 @@ class MapIndex extends Component {
         this.state = {
             markerArr: [],
             points: [],
-            data: [{
-                lat: 29.9645,
-                lng: 121.7416
-            }, {
-                lat: 31.222,
-                lng: 121.498
-            }]
-        }
+            portData: this.props.portData        }
     }
 
     componentDidMount() {
@@ -26,20 +18,26 @@ class MapIndex extends Component {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             maxZoom: 13
         }).addTo(mymap);
-        this.addMarkPoint(this.state.data, mymap)
+        this.addMarkPoint(this.state.portData, mymap)
     }
 
-    addMarkPoint = (data, map) => {
+    addMarkPoint = (portData, map) => {
         let markerArr = this.state.markerArr;
         const {onSelect} = this.props;
-        for (let l of data) {
+        for (let l of portData) {
             let maker = L.marker([l.lat, l.lng]).addTo(map);
-            maker.bindPopup("YAT01<br>20GP/120<br>40GP/30<br>45HQ/10", {
+            let cargos = l.cargos;
+            let displayInfo = l.portCode + "<br>";
+            cargos.forEach((value, index) => {
+                displayInfo += value.type + "/" + value.surplus + "<br>"
+            });
+
+            maker.bindPopup(displayInfo, {
                 autoClose: false,
                 closeOnClick: false
             }).openPopup();
             maker.on('click', function (e) {
-                onSelect();
+                onSelect(l.portCode);
                 this.openPopup();
             });
             markerArr.push(maker);
