@@ -8,6 +8,9 @@ import './index.css'
 import {Button, Drawer, Input, InputNumber, Modal, Select} from "antd";
 import * as _ from "lodash";
 import CargoDistributionList from "../CargoDistributionList";
+import {connect} from "react-redux";
+import store from "../../store";
+import {LOADING, SELECT_CARGOS} from "../../store/actionTypes";
 
 const {Option} = Select;
 
@@ -51,7 +54,8 @@ class TodoList extends Component {
             ],
             currentSelectedPort: {},
             currentSelectedCargos: [],
-            selectedCargoType: undefined
+            selectedCargoType: undefined,
+            cargoValue: 0
         }
     }
 
@@ -118,6 +122,26 @@ class TodoList extends Component {
             })
         }
     };
+    handleInputNumberChange = value=>{
+            this.setState({
+                cargoValue: value
+            })
+    };
+    handleSubmit = e => {
+        console.log('handleSubmit')
+        let cargoInfo = {
+            type: this.state.selectedCargoType,
+            number: this.state.cargoValue,
+            portCode: this.state.currentSelectedPort.portCode
+        };
+        console.log('cargoInfo', cargoInfo)
+        store.dispatch({
+            type: SELECT_CARGOS, payload:
+                {
+                    cargoInfo: cargoInfo
+                }
+        });
+    };
 
     render() {
         return <div>
@@ -142,10 +166,10 @@ class TodoList extends Component {
                             })
                         }
                     </Select>
-                    <InputNumber/>
+                    <InputNumber value={this.state.cargoValue} onChange={this.handleInputNumberChange}/>
                 </Input.Group>
                 <div style={{paddingTop: "10px"}}>
-                    <Button type="primary" style={{width: "70%"}}>确认</Button>
+                    <Button type="primary" style={{width: "70%"}} onClick={this.handleSubmit}>确认</Button>
                 </div>
             </Modal>
             <Drawer
@@ -165,4 +189,8 @@ class TodoList extends Component {
     }
 }
 
-export default TodoList;
+const mapStateToProps = state => {
+    return {selectedCargos: state.cargoReducer.selectedCargos}
+};
+
+export default connect(mapStateToProps, null)(TodoList);

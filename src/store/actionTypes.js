@@ -7,3 +7,5 @@ export const FINISH_ITEM = "finish";
 export const FETCH_ITEM =  "fetch";
 
 export const LOADING = "loading";
+
+export const SELECT_CARGOS = "selectCargos";
