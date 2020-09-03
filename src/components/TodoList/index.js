@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ItemList from "../ItemList";
-import Api from "../../api/Api";
+import Api from "../../apis/Api";
 import HeaderTitle from "../HeaderTitle";
 import InputItem from "../InputItem";
 import MapIndex from "../MapIndex";
